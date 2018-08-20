@@ -1,0 +1,7 @@
+## Author: Oxlotus-Area 52
+## Interface: 80000
+## Title: Item Tooltips
+## Name: Item Tooltips
+## Notes: Appends helpful data to an item's tooltip.
+## Version 1.0.0
+ItemTooltips.lua
