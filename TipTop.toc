@@ -1,0 +1,7 @@
+## Author: Oxlotus-Area 52
+## Interface: 80000
+## Title: TipTop
+## Name: TipTop
+## Notes: Appends helpful data to the tooltip object.
+## Version 1.0.0
+TipTop.lua
