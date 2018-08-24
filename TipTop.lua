@@ -3,7 +3,6 @@
 --------------------------------------------------------------------------------
 --               		Copyright 2018 Alex Metz (Oxlotus-Area 52)              	--
 --------------------------------------------------------------------------------
-print("Me");
 local t = GameTooltip;
 
 local function AddIDToTooltip(gt) -- GameTooltip (gt)
@@ -22,6 +21,5 @@ local function AddIDToTooltip(gt) -- GameTooltip (gt)
     gt:AddDoubleLine("Spell ID: ", spellID, nil, nil, nil, 0.2, 0.7, 1);
 end
 
-print("A");
-
-t:HookScript("OnTooltipSetItem", AddIDToTooltip);
+--t:HookScript("OnTooltipSetItem", AddIDToTooltip);
+print("Test");

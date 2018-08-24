@@ -4,4 +4,4 @@
 ## Name: TipTop
 ## Notes: Appends helpful data to the tooltip object.
 ## Version 1.0.0
-TipTop.lua
+Core.lua
