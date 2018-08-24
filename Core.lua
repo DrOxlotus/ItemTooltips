@@ -5,13 +5,11 @@
 --------------------------------------------------------------------------------
 local function AddItemIDToTooltip(gt)
   -- Items
-  local _, itemLink = gt:GetItem();
+  local itemLink = select(2, gt:GetItem());
   if not itemLink then
     return
   else
-    local itemString = select(3, strfind(itemLink, "|H(.+)|h"));
-    local _, itemID, _, _, _, _, _, _, _, _, _, _, _, _ = strsplit(":", itemString)
-
+    local itemID = string.match(itemLink, "item:(%d*)");
     gt:AddDoubleLine("Item ID: ", itemID, nil, nil, nil, 0.2, 0.7, 1);
   end
 end
