@@ -4,7 +4,6 @@
 --               		Copyright 2018 Alex Metz (Oxlotus-Area 52)              	--
 --------------------------------------------------------------------------------
 local function AddItemIDToTooltip(gt)
-  -- Items
   local itemLink = select(2, gt:GetItem());
   if not itemLink then
     return
@@ -34,5 +33,6 @@ local function AddCreatureIDToTooltip(gt)
 end
 
 GameTooltip:HookScript("OnTooltipSetItem", AddItemIDToTooltip);
+ItemRefTooltip:HookScript("OnTooltipSetItem", AddItemIDToTooltip);
 --GameTooltip:HookScript("OnTooltipSetSpell", AddSpellIDToTooltip);
 GameTooltip:HookScript("OnTooltipSetUnit", AddCreatureIDToTooltip);
