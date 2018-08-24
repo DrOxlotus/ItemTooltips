@@ -6,9 +6,11 @@
 local t = GameTooltip;
 
 local function AddItemIDToTooltip(gt) -- GameTooltip (gt)
-  local itemLink = gt:GetItem();
+  local itemName, itemLink = gt:GetItem();
+  if not itemName or not itemLink then return; end
 
-  local _, _, _, _, itemID, _, _, _, _, _, _, _, _, _, _ = string.find(itemLink, "|?c?f?f?(%x*)|?H?([^:]*):?(%d+):?(%d*):?(%d*):?(%d*):?(%d*):?(%d*):?(%-?%d*):?(%-?%d*):?(%d*):?(%d*)|?h?%[?([^%[%]]*)%]?|?h?|?r?");
+  local itemString = select(3, strfind(itemLink, "|H(.+)|h"));
+  local _, itemID, _, _, _, _, _, _, _, _, _, _, _, _ = strsplit(":", itemString)
 
   gt:AddDoubleLine("Item ID: ", itemID, nil, nil, nil, 0.2, 0.7, 1);
 end
