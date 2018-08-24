@@ -28,7 +28,7 @@ local function AddCreatureIDToTooltip(gt)
     return
   else
     local guid = UnitGUID("mouseover");
-    local _, _, _, _, _, npcID, _ = strsplit("-", guid);
+    local npcID = select(6, strsplit("-", guid, 7));
     gt:AddDoubleLine("Creature ID: ", npcID, nil, nil, nil, 0.2, 0.7, 1);
   end
 end
