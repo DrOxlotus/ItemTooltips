@@ -14,6 +14,7 @@ local function AddItemIDToTooltip(gt)
       for i = 1, 8 do
         if GetMouseFocus().reagentIndex == i then
           itemID = C_TradeSkillUI.GetRecipeReagentItemLink(recipe, i):match("item:(%d*)") or nil;
+          break;
         end
       end
     end
@@ -40,8 +41,8 @@ local function AddCreatureIDToTooltip(gt)
   end
 end
 
-GameTooltip:HookScript("OnTooltipSetItem", AddItemIDToTooltip);
-GameTooltip:HookScript("SetRecipeReagentItem", AddItemIDToTooltip);
 ItemRefTooltip:HookScript("OnTooltipSetItem", AddItemIDToTooltip);
---GameTooltip:HookScript("OnTooltipSetSpell", AddSpellIDToTooltip);
+GameTooltip:HookScript("OnTooltipSetItem", AddItemIDToTooltip);
 GameTooltip:HookScript("OnTooltipSetUnit", AddCreatureIDToTooltip);
+GameTooltip:HookScript("SetRecipeReagentItem", AddItemIDToTooltip);
+--GameTooltip:HookScript("OnTooltipSetSpell", AddSpellIDToTooltip);
