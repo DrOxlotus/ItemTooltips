@@ -3,7 +3,7 @@ TipTop_Creature.__index = TipTop_Creature
 
 function TipTop_Creature:new()
   local self = {}
-  setmetatable(self, TipTop_Item)
+  setmetatable(self, TipTop_Creature)
   return self
 end
 

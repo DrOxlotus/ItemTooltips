@@ -13,13 +13,11 @@ end
 
 GameTooltip:HookScript("OnTooltipSetItem", TipTop.AddItemIDToTooltip)
 GameTooltip:HookScript("SetRecipeReagentItem", TipTop.AddItemIDToTooltip)
-ItemRefTooltip:HookScript("OnTooltipSetItem", TipTop.AddItemIDToTooltip)
 GameTooltip:HookScript("OnTooltipSetSpell", AddSpellIDToTooltip)]]--
 
 -- Creature
---GameTooltip:HookScript("OnTooltipSetUnit", creature.AddIDToTooltip)
+GameTooltip:HookScript("OnTooltipSetUnit", creature.AddIDToTooltip)
 
 -- Item
 GameTooltip:HookScript("OnTooltipSetItem", item.AddIDToTooltip)
-
-creature.Add()
+ItemRefTooltip:HookScript("OnTooltipSetItem", item.AddIDToTooltip)
