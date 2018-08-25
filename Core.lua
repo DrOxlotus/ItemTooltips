@@ -3,46 +3,23 @@
 --------------------------------------------------------------------------------
 --               		Copyright 2018 Alex Metz (Oxlotus-Area 52)              	--
 --------------------------------------------------------------------------------
-local function AddItemIDToTooltip(gt)
-  local itemLink = select(2, gt:GetItem());
-  if not itemLink then
-    return
-  else
-    local itemID = string.match(itemLink, "item:(%d*)");
-    if itemID == "" and TradeSkillFrame ~= nil and TradeSkillFrame:IsVisible() and GetMouseFocus().reagentIndex then
-      local recipe = TradeSkillFrame.RecipeList:GetSelectedRecipeID();
-      for i = 1, 8 do
-        if GetMouseFocus().reagentIndex == i then
-          itemID = C_TradeSkillUI.GetRecipeReagentItemLink(recipe, i):match("item:(%d*)") or nil;
-          break;
-        end
-      end
-    end
-    gt:AddDoubleLine("Item ID: ", itemID, nil, nil, nil, 0.2, 0.7, 1);
-  end
+local creature = TipTop_Creature:new()
+local item = TipTop_Item:new()
+
+--[[local function AddSpellIDToTooltip(gt)
+  local spellID = select(3, gt:GetSpell())
+  print(spellID)
 end
 
-local function AddSpellIDToTooltip(gt)
-  local spellName, spellRank, spellID = gt:GetSpell();
-  if spellID == nil then
-    --print("Spell ID is nil.");
-  else
-    --print(spellID);
-  end
-end
+GameTooltip:HookScript("OnTooltipSetItem", TipTop.AddItemIDToTooltip)
+GameTooltip:HookScript("SetRecipeReagentItem", TipTop.AddItemIDToTooltip)
+ItemRefTooltip:HookScript("OnTooltipSetItem", TipTop.AddItemIDToTooltip)
+GameTooltip:HookScript("OnTooltipSetSpell", AddSpellIDToTooltip)]]--
 
-local function AddCreatureIDToTooltip(gt)
-  if UnitIsPlayer("mouseover") then
-    return
-  else
-    local guid = UnitGUID("mouseover");
-    local npcID = select(6, strsplit("-", guid, 7));
-    gt:AddDoubleLine("Creature ID: ", npcID, nil, nil, nil, 0.2, 0.7, 1);
-  end
-end
+-- Creature
+--GameTooltip:HookScript("OnTooltipSetUnit", creature.AddIDToTooltip)
 
-ItemRefTooltip:HookScript("OnTooltipSetItem", AddItemIDToTooltip);
-GameTooltip:HookScript("OnTooltipSetItem", AddItemIDToTooltip);
-GameTooltip:HookScript("OnTooltipSetUnit", AddCreatureIDToTooltip);
-GameTooltip:HookScript("SetRecipeReagentItem", AddItemIDToTooltip);
---GameTooltip:HookScript("OnTooltipSetSpell", AddSpellIDToTooltip);
+-- Item
+GameTooltip:HookScript("OnTooltipSetItem", item.AddIDToTooltip)
+
+creature.Add()

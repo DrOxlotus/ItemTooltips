@@ -4,4 +4,7 @@
 ## Name: TipTop
 ## Notes: Appends helpful data to the tooltip object.
 ## Version 1.0.0
+Logic\Creature.lua
+Logic\Item.lua
+Logic\Spell.lua
 Core.lua
