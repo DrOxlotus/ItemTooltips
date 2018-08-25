@@ -9,6 +9,14 @@ local function AddItemIDToTooltip(gt)
     return
   else
     local itemID = string.match(itemLink, "item:(%d*)");
+    if itemID == "" and TradeSkillFrame ~= nil and TradeSkillFrame:IsVisible() and GetMouseFocus().reagentIndex then
+      local recipe = TradeSkillFrame.RecipeList:GetSelectedRecipeID();
+      for i = 1, 8 do
+        if GetMouseFocus().reagentIndex == i then
+          itemID = C_TradeSkillUI.GetRecipeReagentItemLink(recipe, i):match("item:(%d*)") or nil;
+        end
+      end
+    end
     gt:AddDoubleLine("Item ID: ", itemID, nil, nil, nil, 0.2, 0.7, 1);
   end
 end
@@ -33,6 +41,7 @@ local function AddCreatureIDToTooltip(gt)
 end
 
 GameTooltip:HookScript("OnTooltipSetItem", AddItemIDToTooltip);
+GameTooltip:HookScript("SetRecipeReagentItem", AddItemIDToTooltip);
 ItemRefTooltip:HookScript("OnTooltipSetItem", AddItemIDToTooltip);
 --GameTooltip:HookScript("OnTooltipSetSpell", AddSpellIDToTooltip);
 GameTooltip:HookScript("OnTooltipSetUnit", AddCreatureIDToTooltip);
