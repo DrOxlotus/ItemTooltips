@@ -7,7 +7,7 @@ function TipTop_Creature:new()
   return self
 end
 
-function TipTop_Creature:AddIDToTooltip()
+function TipTop_Creature:AddCreatureIDToGameTooltip()
   if UnitIsPlayer("mouseover") then
     return
   else

@@ -5,20 +5,15 @@
 --------------------------------------------------------------------------------
 local creature = TipTop_Creature:new()
 local item = TipTop_Item:new()
-
---[[local function AddSpellIDToTooltip(gt)
-  local spellID = select(3, gt:GetSpell())
-  print(spellID)
-end
-
-GameTooltip:HookScript("OnTooltipSetSpell", AddSpellIDToTooltip)]]--
+local spell = TipTop_Spell:new()
 
 -- Creature
-GameTooltip:HookScript("OnTooltipSetUnit", creature.AddIDToTooltip)
+GameTooltip:HookScript("OnTooltipSetUnit", creature.AddCreatureIDToGameTooltip)
 
 -- Item
-GameTooltip:HookScript("OnTooltipSetItem", item.AddIDToGameTooltip)
-ItemRefTooltip:HookScript("OnTooltipSetItem", item.AddIDToItemRefTooltip)
+GameTooltip:HookScript("OnTooltipSetItem", item.AddItemIDToGameTooltip)
+ItemRefTooltip:HookScript("OnTooltipSetItem", item.AddItemIDToItemRefTooltip)
 
--- Trade Skills
-GameTooltip:HookScript("SetRecipeReagentItem", item.AddIDToReagentListTooltip)
+-- Spell
+GameTooltip:HookScript("OnTooltipSetSpell", spell.AddSpellIDToGameTooltip)
+SpellRefTooltip:HookScript("OnTooltipSetSpell", spell.AddSpellIDToSpellRefTooltip)

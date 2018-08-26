@@ -7,7 +7,7 @@ function TipTop_Item:new()
   return self
 end
 
-function TipTop_Item:AddIDToGameTooltip()
+function TipTop_Item:AddItemIDToGameTooltip()
   local itemLink = select(2, GameTooltip:GetItem())
   if not itemLink then
     return
@@ -26,7 +26,7 @@ function TipTop_Item:AddIDToGameTooltip()
   end
 end
 
-function TipTop_Item:AddIDToItemRefTooltip()
+function TipTop_Item:AddItemIDToItemRefTooltip()
   local itemLink = select(2, ItemRefTooltip:GetItem())
   if not itemLink then
     return
