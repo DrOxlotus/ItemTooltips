@@ -14,9 +14,6 @@ function TipTop_Creature:AddIDToTooltip()
     local guid = UnitGUID("mouseover")
     local npcID = select(6, strsplit("-", guid, 7))
     GameTooltip:AddDoubleLine("Creature ID: ", npcID, nil, nil, nil, 0.2, 0.7, 1)
+    GameTooltip:Show()
   end
-end
-
-function TipTop_Creature:Add()
-  print(5 + 5)
 end
