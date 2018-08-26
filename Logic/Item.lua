@@ -13,11 +13,11 @@ function TipTop_Item:AddIDToGameTooltip()
     return
   else
     local itemID = string.match(itemLink, "item:(%d*)")
-    if itemID == "" and TradeSkillFrame ~= nil and TradeSkillFrame.IsVisible() and GetMouseFocus().reagentIndex then
-      local recipeID = TradeSkillFrame.RecipeList:GetSelectedRecipeID()
-      for reagentIndex = 1, 8 do
-        if GetMouseFocus().reagentIndex == reagentIndex then
-          itemID = C_TradeSkillUI.GetRecipeReagentItemLink(recipeID, reagentIndex):match("item:(%d*)") or nil
+    if (itemID == "" or itemID == "0") and TradeSkillFrame ~= nil and TradeSkillFrame:IsVisible() and GetMouseFocus().reagentIndex then
+      local selectedRecipe = TradeSkillFrame.RecipeList:GetSelectedRecipeID()
+      for i = 1, 8 do
+        if GetMouseFocus().reagentIndex == i then
+          itemID = C_TradeSkillUI.GetRecipeReagentItemLink(selectedRecipe, i):match("item:(%d*)") or nil
           break
         end
       end
@@ -27,7 +27,7 @@ function TipTop_Item:AddIDToGameTooltip()
 end
 
 function TipTop_Item:AddIDToItemRefTooltip()
-  local _, itemLink = ItemRefTooltip:GetItem()
+  local itemLink = select(2, ItemRefTooltip:GetItem())
   if not itemLink then
     return
   else

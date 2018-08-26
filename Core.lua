@@ -11,8 +11,6 @@ local item = TipTop_Item:new()
   print(spellID)
 end
 
-GameTooltip:HookScript("OnTooltipSetItem", TipTop.AddItemIDToTooltip)
-GameTooltip:HookScript("SetRecipeReagentItem", TipTop.AddItemIDToTooltip)
 GameTooltip:HookScript("OnTooltipSetSpell", AddSpellIDToTooltip)]]--
 
 -- Creature
@@ -21,3 +19,6 @@ GameTooltip:HookScript("OnTooltipSetUnit", creature.AddIDToTooltip)
 -- Item
 GameTooltip:HookScript("OnTooltipSetItem", item.AddIDToGameTooltip)
 ItemRefTooltip:HookScript("OnTooltipSetItem", item.AddIDToItemRefTooltip)
+
+-- Trade Skills
+GameTooltip:HookScript("SetRecipeReagentItem", item.AddIDToReagentListTooltip)
