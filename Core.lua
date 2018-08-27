@@ -15,5 +15,9 @@ GameTooltip:HookScript("OnTooltipSetItem", item.AddItemIDToGameTooltip)
 ItemRefTooltip:HookScript("OnTooltipSetItem", item.AddItemIDToItemRefTooltip)
 
 -- Spell
+--[[
+Developer Note: Spell's don't have their own reference tooltip; they piggyback on
+the reference tooltip for items. Why? No idea...
+]]--
 GameTooltip:HookScript("OnTooltipSetSpell", spell.AddSpellIDToGameTooltip)
-SpellRefTooltip:HookScript("OnTooltipSetSpell", spell.AddSpellIDToSpellRefTooltip)
+ItemRefTooltip:HookScript("OnTooltipSetSpell", spell.AddSpellIDToItemRefTooltip)

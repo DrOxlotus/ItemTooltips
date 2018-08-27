@@ -16,11 +16,11 @@ function TipTop_Spell:AddSpellIDToGameTooltip()
   end
 end
 
-function TipTop_Spell:AddSpellIDToSpellRefTooltip()
-  local spellID = select(2, SpellRefTooltip:GetSpell())
+function TipTop_Spell:AddSpellIDToItemRefTooltip()
+  local spellID = select(2, ItemRefTooltip:GetSpell())
   if not spellID then
     return
   else
-    SpellRefTooltip:AddDoubleLine("Spell ID: ", spellID, nil, nil, nil, 0.2, 0.7, 1)
+    ItemRefTooltip:AddDoubleLine("Spell ID: ", spellID, nil, nil, nil, 0.2, 0.7, 1)
   end
 end
