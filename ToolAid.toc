@@ -1,9 +1,9 @@
 ## Author: Oxlotus-Area 52
 ## Interface: 80000
-## Title: TipTop
-## Name: TipTop
+## Title: ToolAid
+## Name: ToolAid
 ## Notes: Appends helpful data to the tooltip object.
-## Version 1.0.0
+## Version 1.0.1
 Classes\Creature.lua
 Classes\Item.lua
 Classes\Spell.lua
