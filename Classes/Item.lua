@@ -12,17 +12,25 @@ function TipTop_Item:AddItemIDToGameTooltip()
   if not itemLink then
     return
   else
+    -- We need to check if the item is a recipe before slapping an ID to it
     local itemID = string.match(itemLink, "item:(%d*)")
-    if (itemID == "" or itemID == "0") and TradeSkillFrame ~= nil and TradeSkillFrame:IsVisible() and GetMouseFocus().reagentIndex then
-      local selectedRecipe = TradeSkillFrame.RecipeList:GetSelectedRecipeID()
-      for i = 1, 8 do
-        if GetMouseFocus().reagentIndex == i then
-          itemID = C_TradeSkillUI.GetRecipeReagentItemLink(selectedRecipe, i):match("item:(%d*)") or nil
-          break
+    local itemType = select(6, GetItemInfo(itemLink))
+    if (itemType == "Recipe") then
+      --[[local recipeItemName = select(1, GetItemInfo(itemLink))
+      recipeItemName = recipeItemName:gsub(".*: ", "")
+      print(GetItemInfo(recipeItemName))]]--
+    else
+      if (itemID == "" or itemID == "0") and TradeSkillFrame ~= nil and TradeSkillFrame:IsVisible() and GetMouseFocus().reagentIndex then
+        local selectedRecipe = TradeSkillFrame.RecipeList:GetSelectedRecipeID()
+        for i = 1, 8 do
+          if GetMouseFocus().reagentIndex == i then
+            itemID = C_TradeSkillUI.GetRecipeReagentItemLink(selectedRecipe, i):match("item:(%d*)") or nil
+            break
+          end
         end
       end
+      GameTooltip:AddDoubleLine("Item ID: ", itemID, nil, nil, nil, 0.2, 0.7, 1)
     end
-    GameTooltip:AddDoubleLine("Item ID: ", itemID, nil, nil, nil, 0.2, 0.7, 1)
   end
 end
 
