@@ -5,6 +5,7 @@ ToolAid_Item.__index = ToolAid_Item
 function ToolAid_Item:new()
   local self = {}
   setmetatable(self, ToolAid_Item)
+  self.itemLink = select(2, GameTooltip:GetItem())
   return self
 end
 
@@ -54,7 +55,11 @@ function ToolAid_Item:AddDefaultStackInfoToGameTooltip()
   local inventoryItemCount = GetItemCount(itemLink, false)
   local bankItemCount = GetItemCount(itemLink, true)
   if (inventoryItemCount == 0) and (bankItemCount - inventoryItemCount == 0) then
-    -- The player doesn't have any of the shown item
+    if (itemStackCount < 2) then
+      -- The player doesn't have any of the shown item and it only stacks to 1
+    else
+      GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount), nil, nil, nil, 0.89, 0.88, 0.004)
+    end
   elseif (itemStackCount > 1) and (bankItemCount - inventoryItemCount == 0) then
     GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount).." (Inventory: "..tostring(inventoryItemCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
   elseif (itemStackCount > 1) and (bankItemCount - inventoryItemCount ~= 0) then
@@ -73,7 +78,11 @@ function ToolAid_Item:AddReagentStackInfoToGameTooltip(itemID)
   local inventoryItemCount = GetItemCount(itemID, false)
   local bankItemCount = GetItemCount(itemID, true)
   if (inventoryItemCount == 0) and (bankItemCount - inventoryItemCount == 0) then
-    -- The player doesn't have any of the shown reagent
+    if (itemStackCount < 2) then
+      -- The player doesn't have any of the shown reagent and it only stacks to 1
+    else
+      GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount), nil, nil, nil, 0.89, 0.88, 0.004)
+    end
   elseif (itemStackCount > 1) and (bankItemCount - inventoryItemCount == 0) then
     GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount).." (Inventory: "..tostring(inventoryItemCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
   elseif (itemStackCount > 1) and (bankItemCount - inventoryItemCount ~= 0) then
