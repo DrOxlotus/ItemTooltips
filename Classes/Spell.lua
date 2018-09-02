@@ -1,13 +1,13 @@
-TipTop_Spell = {}
-TipTop_Spell.__index = TipTop_Spell
+ToolAid_Spell = {}
+ToolAid_Spell.__index = ToolAid_Spell
 
-function TipTop_Spell:new()
+function ToolAid_Spell:new()
   local self = {}
-  setmetatable(self, TipTop_Spell)
+  setmetatable(self, ToolAid_Spell)
   return self
 end
 
-function TipTop_Spell:AddSpellIDToGameTooltip()
+function ToolAid_Spell:AddSpellIDToGameTooltip()
   local spellID = select(2, GameTooltip:GetSpell())
   if not spellID then
     return
@@ -16,7 +16,35 @@ function TipTop_Spell:AddSpellIDToGameTooltip()
   end
 end
 
-function TipTop_Spell:AddSpellIDToItemRefTooltip()
+function ToolAid_Spell:AddBuffIDToGameTooltip()
+  local buffID = select(10, UnitBuff("mouseover"))
+  print(buffID)
+  if not buffID then
+    return
+  else
+    GameTooltip:AddDoubleLine("Spell ID: ", buffID, nil, nil, nil, 0.2, 0.7, 1)
+  end
+end
+
+function ToolAid_Spell:AddDebuffIDToGameTooltip()
+  local debuffID = select(10, UnitBuff("mouseover"))
+  if not debuffID then
+    return
+  else
+    GameTooltip:AddDoubleLine("Spell ID: ", debuffID, nil, nil, nil, 0.2, 0.7, 1)
+  end
+end
+
+function ToolAid_Spell:AddAuraIDToGameTooltip()
+  local unitAuraID = select(10, UnitAura("mouseover"))
+  if not unitAuraID then
+    return
+  else
+    GameTooltip:AddDoubleLine("Spell ID: ", unitAuraID, nil, nil, nil, 0.2, 0.7, 1)
+  end
+end
+
+function ToolAid_Spell:AddSpellIDToItemRefTooltip()
   local spellID = select(2, ItemRefTooltip:GetSpell())
   if not spellID then
     return

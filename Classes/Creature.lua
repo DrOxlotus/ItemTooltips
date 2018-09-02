@@ -1,13 +1,13 @@
-TipTop_Creature = {}
-TipTop_Creature.__index = TipTop_Creature
+ToolAid_Creature = {}
+ToolAid_Creature.__index = ToolAid_Creature
 
-function TipTop_Creature:new()
+function ToolAid_Creature:new()
   local self = {}
-  setmetatable(self, TipTop_Creature)
+  setmetatable(self, ToolAid_Creature)
   return self
 end
 
-function TipTop_Creature:AddCreatureIDToGameTooltip()
+function ToolAid_Creature:AddCreatureIDToGameTooltip()
   if UnitIsPlayer("mouseover") then
     return
   else

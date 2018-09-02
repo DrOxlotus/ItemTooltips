@@ -4,15 +4,17 @@
 --               		Copyright 2018 Alex Metz (Oxlotus-Area 52)              	--
 --------------------------------------------------------------------------------
 -- Class Variables
-local creature = TipTop_Creature:new()
-local item = TipTop_Item:new()
-local spell = TipTop_Spell:new()
+--local achievement = ToolAid_Achievement:new()
+local creature = ToolAid_Creature:new()
+local item = ToolAid_Item:new()
+local spell = ToolAid_Spell:new()
 
 -- Creature
 GameTooltip:HookScript("OnTooltipSetUnit", creature.AddCreatureIDToGameTooltip)
 
 -- Item
 GameTooltip:HookScript("OnTooltipSetItem", item.AddItemIDToGameTooltip)
+GameTooltip:HookScript("OnTooltipSetItem", item.AddDefaultStackInfoToGameTooltip)
 ItemRefTooltip:HookScript("OnTooltipSetItem", item.AddItemIDToItemRefTooltip)
 
 -- Spell
