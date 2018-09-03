@@ -14,7 +14,7 @@ GameTooltip:HookScript("OnTooltipSetUnit", creature.AddCreatureIDToGameTooltip)
 
 -- Item
 GameTooltip:HookScript("OnTooltipSetItem", item.AddItemIDToGameTooltip)
-GameTooltip:HookScript("OnTooltipSetItem", item.AddDefaultStackInfoToGameTooltip)
+GameTooltip:HookScript("OnTooltipSetItem", item.AddStackInfoToGameTooltip)
 ItemRefTooltip:HookScript("OnTooltipSetItem", item.AddItemIDToItemRefTooltip)
 
 -- Spell

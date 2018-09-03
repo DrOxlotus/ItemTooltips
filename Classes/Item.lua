@@ -28,7 +28,7 @@ function ToolAid_Item:AddItemIDToGameTooltip()
           if GetMouseFocus().reagentIndex == i then
             itemID = C_TradeSkillUI.GetRecipeReagentItemLink(selectedRecipe, i):match("item:(%d*)") or nil
             GameTooltip:AddDoubleLine("Item ID: ", itemID, nil, nil, nil, 0.2, 0.7, 1)
-            ToolAid_Item:AddReagentStackInfoToGameTooltip(itemID)
+            ToolAid_Item:AddStackInfoToGameTooltip(itemID)
             break
           end
         end
@@ -48,49 +48,48 @@ function ToolAid_Item:AddItemIDToItemRefTooltip()
   end
 end
 
--- This function is used for all items outside of the trade skill reagent frame
-function ToolAid_Item:AddDefaultStackInfoToGameTooltip()
+function ToolAid_Item:AddStackInfoToGameTooltip(itemID)
   local itemLink = select(2, GameTooltip:GetItem())
-  local itemStackCount = select(8, GetItemInfo(itemLink))
-  local inventoryItemCount = GetItemCount(itemLink, false)
-  local bankItemCount = GetItemCount(itemLink, true)
-  if (inventoryItemCount == 0) and (bankItemCount - inventoryItemCount == 0) then
-    if (itemStackCount < 2) then
-      -- The player doesn't have any of the shown item and it only stacks to 1
+  if itemID then
+    local itemStackCount = select(8, GetItemInfo(itemID))
+    local inventoryCount = GetItemCount(itemID)
+    local bankCount = GetItemCount(itemID, true)
+    if (inventoryCount == 0) and (bankCount - inventoryCount == 0) then
+      if (itemStackCount < 2) then
+        -- The player doesn't have any of the shown item and it only stacks to 1
+      else
+        GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount), nil, nil, nil, 0.89, 0.88, 0.004)
+      end
+    elseif (itemStackCount > 1) and (bankCount - inventoryCount == 0) then
+      GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount).." (Inventory: "..tostring(inventoryCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
+    elseif (itemStackCount > 1) and (bankCount - inventoryCount ~= 0) then
+      GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount).." (Inventory: "..tostring(inventoryCount)..", Bank: "..tostring(bankCount - inventoryCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
+    elseif (itemStackCount == 1) and (bankCount - inventoryCount == 0) then
+      GameTooltip:AddDoubleLine("Stack Info: ", "(Inventory: "..tostring(inventoryCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
+    elseif (itemStackCount == 1) and (bankCount - inventoryCount ~= 0) then
+      GameTooltip:AddDoubleLine("Stack Info: ", "(Inventory: "..tostring(inventoryCount)..", Bank: "..tostring(bankCount - inventoryCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
     else
-      GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount), nil, nil, nil, 0.89, 0.88, 0.004)
     end
-  elseif (itemStackCount > 1) and (bankItemCount - inventoryItemCount == 0) then
-    GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount).." (Inventory: "..tostring(inventoryItemCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
-  elseif (itemStackCount > 1) and (bankItemCount - inventoryItemCount ~= 0) then
-    GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount).." (Inventory: "..tostring(inventoryItemCount)..", Bank: "..tostring(bankItemCount - inventoryItemCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
-  elseif (itemStackCount == 1) and (bankItemCount - inventoryItemCount == 0) then
-    GameTooltip:AddDoubleLine("Stack Info: ", "(Inventory: "..tostring(inventoryItemCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
-  elseif (itemStackCount == 1) and (bankItemCount - inventoryItemCount ~= 0) then
-    GameTooltip:AddDoubleLine("Stack Info: ", "(Inventory: "..tostring(inventoryItemCount)..", Bank: "..tostring(bankItemCount - inventoryItemCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
-  else
-  end
-end
-
--- This function is used explicitly for trade skill reagents
-function ToolAid_Item:AddReagentStackInfoToGameTooltip(itemID)
-  local itemStackCount = select(8, GetItemInfo(itemID))
-  local inventoryItemCount = GetItemCount(itemID, false)
-  local bankItemCount = GetItemCount(itemID, true)
-  if (inventoryItemCount == 0) and (bankItemCount - inventoryItemCount == 0) then
-    if (itemStackCount < 2) then
-      -- The player doesn't have any of the shown reagent and it only stacks to 1
+  elseif itemLink then
+    local itemStackCount = select(8, GetItemInfo(itemLink))
+    local inventoryCount = GetItemCount(itemLink)
+    local bankCount = GetItemCount(itemLink, true)
+    if (inventoryCount == 0) and (bankCount - inventoryCount == 0) then
+      if (itemStackCount < 2) then
+        -- The player doesn't have any of the shown item and it only stacks to 1
+      else
+        GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount), nil, nil, nil, 0.89, 0.88, 0.004)
+      end
+    elseif (itemStackCount > 1) and (bankCount - inventoryCount == 0) then
+      GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount).." (Inventory: "..tostring(inventoryCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
+    elseif (itemStackCount > 1) and (bankCount - inventoryCount ~= 0) then
+      GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount).." (Inventory: "..tostring(inventoryCount)..", Bank: "..tostring(bankCount - inventoryCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
+    elseif (itemStackCount == 1) and (bankCount - inventoryCount == 0) then
+      GameTooltip:AddDoubleLine("Stack Info: ", "(Inventory: "..tostring(inventoryCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
+    elseif (itemStackCount == 1) and (bankCount - inventoryCount ~= 0) then
+      GameTooltip:AddDoubleLine("Stack Info: ", "(Inventory: "..tostring(inventoryCount)..", Bank: "..tostring(bankCount - inventoryCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
     else
-      GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount), nil, nil, nil, 0.89, 0.88, 0.004)
     end
-  elseif (itemStackCount > 1) and (bankItemCount - inventoryItemCount == 0) then
-    GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount).." (Inventory: "..tostring(inventoryItemCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
-  elseif (itemStackCount > 1) and (bankItemCount - inventoryItemCount ~= 0) then
-    GameTooltip:AddDoubleLine("Stack Info: ", tostring(itemStackCount).." (Inventory: "..tostring(inventoryItemCount)..", Bank: "..tostring(bankItemCount - inventoryItemCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
-  elseif (itemStackCount == 1) and (bankItemCount - inventoryItemCount == 0) then
-    GameTooltip:AddDoubleLine("Stack Info: ", "(Inventory: "..tostring(inventoryItemCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
-  elseif (itemStackCount == 1) and (bankItemCount - inventoryItemCount ~= 0) then
-    GameTooltip:AddDoubleLine("Stack Info: ", "(Inventory: "..tostring(inventoryItemCount)..", Bank: "..tostring(bankItemCount - inventoryItemCount)..")", nil, nil, nil, 0.89, 0.88, 0.004)
   else
   end
 end

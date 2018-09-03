@@ -3,7 +3,7 @@
 ## Title: ToolAid
 ## Name: ToolAid
 ## Notes: Appends helpful data to the tooltip object.
-## Version 1.0.2
+## Version 1.0.3
 Classes\Achievement.lua
 Classes\Creature.lua
 Classes\Item.lua
